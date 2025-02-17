@@ -1,0 +1,35 @@
+Debouncing
+Debouncing is a technique used to ensure that a function is executed only after a specified delay, once the events stop firing. 
+It delays the execution of a function until after a certain period of inactivity.
+A real-world example of debouncing can be seen on an eCommerce website like Flipkart. When typing in the search box, such as for "JavaScript books," 
+you might notice that search results update only after pausing for a few milliseconds. During continuous typing, no results are shown until you stop 
+for a brief moment, typically around 300 to 400 milliseconds. This delay ensures that an API call is made only after typing has ceased, rather than on 
+every keystroke. This approach prevents excessive API calls and reduces server load, which is the essence of debouncing. It 
+optimizes the process by making fewer, more deliberate calls to the backend.
+Let's say we have a search box with a debounce method and a delay of 400 milliseconds. As we type words one after another, with a gap of 100 milliseconds
+ between each keystroke, no API call will be executed during this time. However, if we pause and make another keystroke after a delay of more than 400 
+ milliseconds, such as 600 milliseconds, the API call will be triggered at that moment. This is how debouncing works—it limits the execution of a 
+ function call and waits for a specified period, in this case, 400 milliseconds, before running it again.
+
+Throttling
+In throttling, it limits the execution of an event handler function when the event is triggered continuously due to user actions.
+Throttling is a technique used to ensure that a function is executed at 
+most once in a specified period, regardless of how many times the event is
+triggered.
+A real world example of throttling On Twitter, when you scroll down the page, you'll notice that as soon as you reach a certain point, 
+it makes an API call to fetch more posts. This behavior is due to throttling being applied to the scroll action on the webpage. 
+Throttling ensures that the API calls for loading more posts are made at a controlled rate, rather than continuously as you scroll.
+When constantly scrolling a webpage, such as on a site with infinite scrolling, throttling is used to manage API calls effectively. 
+For instance, if you scroll and the system detects that you're around 500 pixels from the bottom of the screen, it will make an API call to 
+fetch more posts, keeping the feed continuously updated.
+
+Without throttling, making API calls on every single scroll event would result in an excessive number of requests, which is inefficient and
+ burdensome for the server. Throttling helps by limiting the rate at which these API calls are made.
+
+In practice, throttling ensures that API calls are only made at a specified interval—such as every 500 milliseconds—regardless of how frequently 
+the scroll event occurs. Even if there is a pause between scrolls, the system will still adhere to this interval, making API calls at most once 
+every 500 milliseconds. This approach prevents overwhelming the server with requests and maintains smooth performance.
+
+Throttling thus controls the frequency of function execution during continuous user actions like scrolling, resizing, or other events,
+ optimizing resource use and enhancing user experience.
+
