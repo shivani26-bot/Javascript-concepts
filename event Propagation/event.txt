@@ -1,0 +1,67 @@
+ Ques1. what is event propagation?
+Imagine you have a div, inside that is a form, and inside the form is a button. If you add event listeners to all three elements and then click on the button, multiple events are triggered. When you click the button, you’re not just interacting with the button but also the parent form and div elements that contain it.
+
+This raises important questions, such as: In what order are these events executed? Do they trigger from the button first, then the form, then the div? Or does the div trigger first, followed by the form and then the button? And more importantly, is it possible to control this order of execution?
+
+This process of determining the order and direction in which events are triggered is known as event propagation.
+
+Ques2. what is event bubling?
+Bubbling in event propagation goes from bottom to top, meaning the event first triggers on the innermost (target) element and then "bubbles up" through its parent elements.
+
+For example, when you click a button inside a form that is within a div, the event first fires on the button, then moves up to the form, and finally to the div. This is the default behavior of the bubbling phase of event propagation.
+ button -> form -> div.
+ Not all events in JavaScript propagate via bubbling. Some events, such as focus and blur, do not bubble. These events are triggered directly on the element they are applied to and do not move up to parent elements in the DOM hierarchy.
+
+ Q3. event.target vs this.target vs event.currentTarget
+event.target: The element that initiated or triggered the event.This is the actual element that was clicked or interacted with, regardless of whether the event is bubbling or capturing.
+event.currentTarget: The element on which the event handler is attached.event.currentTarget is the element that is actively handling the event. This is especially useful in event delegation where you might bind an event listener to a parent but want to know which child triggered the event.
+this: In event handlers, this refers to the element on which the event listener is placed, so it is equivalent to event.currentTarget.
+
+Q4. what is event capturing/trickling?
+In the capturing phase, the event starts at the window or document level and "trickles down" through the ancestors (parent elements) until it reaches the target element where the event occurred. This means the event is first captured by the outermost element (like the document or window) and then passed down to the innermost target element.
+
+Q5 how to stop bubbling or capturing?
+e.stopPropagation()
+
+Q6. what is event delegation?
+If you're supposed to click on a product like a mobile, it should trigger an event, and the same goes for items like headphones or laptops. But should you add individual event listeners to each product? No, because doing so would overload the page with numerous event listeners. Imagine if there were an unlimited list of products; this would result in an equally large number of event listeners running simultaneously, which is inefficient.
+
+This is where event delegation comes into play. Instead of attaching event listeners to each product, you add an event listener to the parent element (for example, a div containing all the products). Then, whenever a product is clicked, you check whether it's a mobile, headphone, or laptop, and route the user to the respective product page based on the click.
+
+Event delegation reduces the number of event listeners and improves performance, especially when dealing with large or dynamic lists of items.
+
+Q7. what's the output?
+const div = document.querySelector("div");
+const form = document.querySelector("form");
+const button = document.querySelector("button");
+
+div.addEventListener("click", function () {
+  alert("div");
+});
+
+button.addEventListener("click", function () {
+  alert("button");
+});
+
+form.addEventListener("click", function () {
+  alert("form");
+});
+Whenever we click on this button, the form event should be executed first, followed by the button event, and then the div event.
+
+div.addEventListener("click", function () {
+  alert("div");
+});
+
+button.addEventListener("click", function () {
+  alert("button");
+});
+
+form.addEventListener(
+  "click",
+  function () {
+    alert("form");
+  },
+  {
+    capture: true,
+  }
+);

@@ -1,0 +1,6 @@
+If we are trying to fetch data from an API, we request the data from our front end, and the API promises to return 
+some data. If the promise is fulfilled, we can use this data and display it to our user. However, if the promise 
+is rejected and we don't get the data, we will display an error message instead.
+
+
+
